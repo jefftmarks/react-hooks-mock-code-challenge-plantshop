@@ -22,7 +22,8 @@
       "id": 4,
       "name": "Pothos",
       "image": "./images/pothos.jpg",
-      "price": 12.11
+      "price": 12.11,
+      "inStock": false
     },
     {
       "id": 5,
@@ -41,6 +42,12 @@
       "name": "Fiddle Leaf Fig",
       "image": "./images/fiddle-leaf-fig.jpg",
       "price": 55
+    },
+    {
+      "name": "Cactus",
+      "image": "https://images.halloweencostumes.com/products/43419/1-1/kids-cactus-costume.jpg",
+      "price": "9.99",
+      "id": 8
     }
   ]
 }
