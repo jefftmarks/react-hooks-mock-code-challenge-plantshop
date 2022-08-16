@@ -22,8 +22,7 @@
       "id": 4,
       "name": "Pothos",
       "image": "./images/pothos.jpg",
-      "price": 12.11,
-      "inStock": false
+      "price": 12.11
     },
     {
       "id": 5,
@@ -46,7 +45,7 @@
     {
       "name": "Cactus",
       "image": "https://images.halloweencostumes.com/products/43419/1-1/kids-cactus-costume.jpg",
-      "price": "9.99",
+      "price": "30",
       "id": 8
     }
   ]

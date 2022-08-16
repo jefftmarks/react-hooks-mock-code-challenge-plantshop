@@ -20,6 +20,10 @@ function PlantPage() {
   function handleSearch(query) {
     setSearch(query)
   }
+  
+  function handleDeletePlant(deleteId) {
+    setPlants(plants.filter(plant => plant.id !== deleteId))
+  }
 
   const filteredPlants = plants.filter(plant => {
     return plant.name.toLowerCase().includes(search.toLowerCase())
@@ -30,7 +34,7 @@ function PlantPage() {
     <main>
       <NewPlantForm onAddPlant={handleAddPlant} />
       <Search onSearch={handleSearch}/>
-      <PlantList plants={filteredPlants} />
+      <PlantList plants={filteredPlants} handleOnDeletePlant={handleDeletePlant}/>
     </main>
   );
 }
