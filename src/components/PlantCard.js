@@ -1,10 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 
-function PlantCard({plant, handleOnDeletePlant}) {
-  const {id, name, image, price} = plant;
+function PlantCard({plant, onDeletePlant, onUpdatePrice, onUpdateStock}) {
 
-  const [isInStock, setIsInStock] = useState(true);
-  const [plantPrice, setPlantPrice] = useState(price);
+  const {id, name, image, price , inStock} = plant;
 
   function onClickStock() {
     fetch(`http://localhost:6001/plants/${id}`, {
@@ -12,13 +10,13 @@ function PlantCard({plant, handleOnDeletePlant}) {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({inStock: !isInStock}),
+      body: JSON.stringify({inStock: !plant.inStock}),
     })
       .then(res => res.json())
-      .then(updatedPlant => setIsInStock(updatedPlant.inStock))
+      .then(updatedPlant => onUpdateStock(updatedPlant))
   }
 
-  function onUpdatePrice(event) {
+  function onClickPrice(event) {
     fetch(`http://localhost:6001/plants/${id}`, {
       method: "PATCH",
       headers: {
@@ -27,15 +25,15 @@ function PlantCard({plant, handleOnDeletePlant}) {
       body: JSON.stringify({price: event.target.value}),
     })
       .then(res => res.json())
-      .then(updatedPlant => setPlantPrice(updatedPlant.price))
+      .then(updatedPlant => onUpdatePrice(updatedPlant))
   }
 
-  function onDeletePlant() {
+  function onClickDelete() {
     fetch(`http://localhost:6001/plants/${id}`, {
       method: "DELETE",
     })
       .then(res => res.json())
-      .then(() => handleOnDeletePlant(id))
+      .then(() => onDeletePlant(id))
   }
 
 
@@ -48,11 +46,11 @@ function PlantCard({plant, handleOnDeletePlant}) {
         type="number"
         id="price"
         name="price"
-        value={plantPrice}
-        onChange={onUpdatePrice}
+        value={price}
+        onChange={onClickPrice}
       />
       </label>
-      {isInStock ? (
+      {inStock ? (
         <button
           className="primary"
           onClick={onClickStock}
@@ -60,9 +58,13 @@ function PlantCard({plant, handleOnDeletePlant}) {
             In Stock
         </button>
       ) : (
-        <button>Out of Stock</button>
+        <button
+          onClick={onClickStock}
+        >
+          Out of Stock
+        </button>
       )}
-      <button onClick={onDeletePlant}>Delete</button>
+      <button onClick={onClickDelete}>Delete</button>
     </li>
   );
 }
